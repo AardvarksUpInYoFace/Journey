@@ -299,18 +299,22 @@ map_type = ceil(random(1));
         
         spread = ceil(random_range(map_size/2, map_size ));
         
-        map_size = map_size*400
+        map_size = (map_size*400) 
         
-        room_width = map_size
-        room_height = map_size 
+        map_size_n = (map_size) div 64
         
-        for(var _i = 0; _i &lt; room_width/64; _i++){
-            for(var _j = 0; _j &lt; room_height/64; _j++){
+        map_size_n +=  (4 - map_size_n mod 4)
+        
+        room_width = map_size 
+        room_height = map_size
+        
+        for(var _i = 0; _i &lt; map_size_n; _i++){
+            for(var _j = 0; _j&lt; map_size_n; _j++){
             grid[_i,_j] = 1;
             
-            if _i mod 4 == 0 &amp;&amp; _j mod 4 == 0{
-                tile_add(bkg_4, 0, 0, 256, 128, (_i - _j)*32+ room_width/2, (_i + _j)*16+ room_height/4, 32);
-                }
+          if _i mod 4 == 0 &amp;&amp; _j mod 4 == 0{
+                tile_add(bkg_4, 0, 0, 256, 128, (_i - _j)*32+ room_width/2  -128, (_i + _j)*16+ room_height/4, -(y+20)/room_height);
+               }
             }
             
         }
@@ -321,16 +325,16 @@ map_type = ceil(random(1));
  
             }
             
-            
+        f_spawn(obj_player, 1, 1);
         
         
         
         f_spawn(obj_orb1, 2, spread);
-        f_spawn(xp_orb_obj, 99, spread*3);
+        f_spawn(xp_orb_obj, 1, spread*3);
             
     //spawn player
     
-        f_spawn(obj_player, 9, 1);
+        
 
         break;
     case 2:
@@ -372,7 +376,17 @@ map_type = ceil(random(1));
 
 instance_create(room_width/2, room_height/2,obj_particles1);
 
-//surf_main = surface_create(view_wview,view_hview);
+surf_main = surface_create(view_wview,view_hview);
+
+
+  surface_main = surface_create(view_wview,view_hview);
+  
+  surface_set_target(surface_main);
+  surface_reset_target();
+  //view_surface_id[0] = surface_main;
+  //display_set_gui_size(view_wview,view_hview);
+  
+  
 //surf_mask = surface_create(view_wview,view_hview);
 
 
@@ -387,9 +401,7 @@ instance_create(room_width/2, room_height/2,obj_particles1);
   view_hport[0] = 720;
   
  
-  surface_main = surface_create(view_wview,view_hview);
-  view_surface_id[0] = surface_main;
-  display_set_gui_size(view_wview,view_hview);
+
   
   if(window_get_width() != view_wport or window_get_height() != view_hport){
     window_set_size(view_wport,view_hport);
@@ -458,13 +470,17 @@ if !view_visible[0]
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Drawing Timer
+            <string>/// Drawing Timer and test debug
 
 
 draw_set_colour(c_white);
 draw_text(view_wview[0]/2,60, string(minutes) + ":" + string(seconds));
 
+// debug
 
+draw_text(view_wview[0]/2,100,string(obj_player.i) + ":" + string(obj_player.j));
+
+draw_text(view_wview[0]/2,300, map_size_n);
 </string>
           </argument>
         </arguments>

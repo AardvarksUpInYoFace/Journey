@@ -54,7 +54,7 @@ v_spd_max = 12.5;
 
 walk_counter = 0; // for audio
 
-
+ overrideBounce = false;
 
 
 </string>
@@ -80,7 +80,62 @@ walk_counter = 0; // for audio
           <argument>
             <kind>1</kind>
             <string>/// Player Movement End
+/*
 
+
+
+  if j &lt; 0 ^^  j &gt; obj_control.map_size_n {
+    x = xprevious;
+    y = yprevious - v_spd;
+  
+  }
+  
+  if i &gt; obj_control.map_size_n ^^  i &lt; 0{
+    x = xprevious - h_spd;
+    y = yprevious ;
+    }
+    
+    
+    
+ if (position_meeting(x+h_spd,y,obj_collidble)) {
+x = xprevious ;
+y = yprevious;
+}
+
+ if (position_meeting(x,y+v_spd,obj_collidble)) {
+x = xprevious;
+y = yprevious - v_spd;
+}
+
+*/
+
+if j &gt; -0.01 &amp;&amp;  j &lt; obj_control.map_size_n &amp;&amp; i &lt; obj_control.map_size_n &amp;&amp;  i &gt; -0.01 {
+
+ if obj_control.grid[i,j] = 1{
+
+h_counter += h_spd;
+v_counter += v_spd;
+
+h = round(h_counter);
+v = round(v_counter);
+
+h_counter -= h;
+v_counter -= v;
+
+
+x+=h*2
+y+=v
+
+}
+
+}
+
+else{ 
+    h_spd = 0
+     v_spd = 0
+    }
+
+/*
 if(!pause){
 
 var h, v;
@@ -123,6 +178,7 @@ y+=v
             <kind>1</kind>
             <string>/// Player Movement
 
+depth = -y/room_height
 
 xDir = key_right - key_left;
 yDir = key_down - key_up;
@@ -172,6 +228,37 @@ v_dcc = abs(v_spd)/12
     
     
     
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Player Collision???
+
+
+x_new = x+h_spd*2
+y_new = y+v_spd
+ 
+ i = round(0.5*((x_new - room_width/2)/32  + (y_new - room_height/4)/16));
+ j = round(0.5*((y_new - room_height/4)/16 - (x_new - room_width/2)/32));
+ 
+
 
 </string>
           </argument>
