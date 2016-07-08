@@ -11,16 +11,53 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_orb1</sprite>
     <sprite>sprites\spr_tile1</sprite>
+    <sprite>sprites\spr_tile3</sprite>
+    <sprite>sprites\spr_tile4</sprite>
+    <sprite>sprites\spr_tile2</sprite>
     <sprite>sprites\spr_xp_orb</sprite>
     <sprite>sprites\sprite4</sprite>
     <sprite>sprites\sprite5</sprite>
     <sprite>sprites\sprite7</sprite>
+    <sprite>sprites\spr_test_anim_0</sprite>
+    <sprite>sprites\spr_test_anim_1</sprite>
+    <sprite>sprites\spr_test_anim_2</sprite>
+    <sprite>sprites\spr_test_anim_3</sprite>
+    <sprite>sprites\spr_test_anim_4</sprite>
+    <sprite>sprites\spr_test_anim_5</sprite>
+    <sprite>sprites\spr_test_anim_6</sprite>
+    <sprite>sprites\spr_test_anim_7</sprite>
+    <sprite>sprites\spr_signpost</sprite>
+    <sprites name="kid sprites">
+      <sprites name="running">
+        <sprite>sprites\kid_run_0_spr</sprite>
+        <sprite>sprites\kid_run_1_spr</sprite>
+        <sprite>sprites\kid_run_2_spr</sprite>
+        <sprite>sprites\kid_run_3_spr</sprite>
+        <sprite>sprites\kid_run_4_spr</sprite>
+        <sprite>sprites\kid_run_5_spr</sprite>
+        <sprite>sprites\kid_run_6_spr</sprite>
+        <sprite>sprites\kid_run_7_spr</sprite>
+      </sprites>
+      <sprites name="idle">
+        <sprite>sprites\kid_idle_0_spr</sprite>
+        <sprite>sprites\kid_idle_1_spr</sprite>
+        <sprite>sprites\kid_idle_2_spr</sprite>
+        <sprite>sprites\kid_idle_3_spr</sprite>
+        <sprite>sprites\kid_idle_4_spr</sprite>
+        <sprite>sprites\kid_idle_5_spr</sprite>
+        <sprite>sprites\kid_idle_6_spr</sprite>
+        <sprite>sprites\kid_idle_7_spr</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_1</background>
     <background>background\background1</background>
     <background>background\bkg_3</background>
     <background>background\bkg_4</background>
+    <background>background\background4</background>
+    <background>background\bkg_5</background>
+    <background>background\bkg_6</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -41,6 +78,8 @@
     <object>objects\obj_tile1</object>
     <object>objects\obj_particles1</object>
     <object>objects\xp_orb_obj</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_moves</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>

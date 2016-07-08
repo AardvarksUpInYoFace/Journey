@@ -37,8 +37,7 @@ chase_range = 200; //the range at which the orbs move towards the player
 explosion_isfinished = false;
 
 overrideBounce = false;
-canCollect = false;
-alarm[0] = 80;
+
 
 </string>
           </argument>
@@ -65,29 +64,6 @@ alarm[0] = 80;
             <string>/// death sound
 
 audio_play_sound(bubble_burst,5,false);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>canCollect = true;
 </string>
           </argument>
         </arguments>
@@ -246,11 +222,11 @@ global.xp += 1.0;
 //Check "Included Files" folder for instructions on how to use
 
 
-
+/*
 
 draw_trail(16, (sprite_width-3), c_fuchsia, -1, true, 0.5);
 
-
+*/
     
     draw_sprite(sprite4, -1, x, y);
     
