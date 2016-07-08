@@ -10,6 +10,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_orb1</sprite>
+    <sprite>sprites\spr_orb1_attack</sprite>
     <sprite>sprites\spr_tile1</sprite>
     <sprite>sprites\spr_tile3</sprite>
     <sprite>sprites\spr_tile4</sprite>
@@ -69,7 +70,10 @@
     <script>scripts\f_new_world.gml</script>
     <script>scripts\f_map2screen.gml</script>
     <script>scripts\draw_trail.gml</script>
+    <script>scripts\f_coord_get.gml</script>
+    <script>scripts\f_example_ai_attack.gml</script>
   </scripts>
+  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_collidble</object>
@@ -80,6 +84,8 @@
     <object>objects\xp_orb_obj</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_moves</object>
+    <object>objects\obj_mouse</object>
+    <object>objects\obj_enemy_attack</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>

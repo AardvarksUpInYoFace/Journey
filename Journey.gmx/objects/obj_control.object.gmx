@@ -121,33 +121,6 @@ map_type = 0;
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// orb globals
-
-globalvar tails, maxTails, xp;
-global.tails = 0;
-global.maxTails = 50;
-
-global.xp = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="3" enumb="1">
       <action>
@@ -247,7 +220,7 @@ if(keyboard_check_pressed(ord("R")) or keyboard_check_pressed(vk_shift) or gamep
             <string>/// Timing Check
 
 //if time &lt;= 0 {
-
+/*
 if !instance_exists(xp_orb_obj) {
 
     room_restart();
@@ -356,12 +329,12 @@ map_type = ceil(random(1));
             
         f_spawn(obj_player, 1, 1);
         
+        // f_spawn(xp_orb_obj, 1, 1);
         
-        
-        f_spawn(obj_orb1, 2, spread);
-        f_spawn(xp_orb_obj, 1, spread*3);
+        f_spawn(obj_enemy, 1, spread/2);
+
             
-    //spawn player
+     //spawn player     
     
         
 

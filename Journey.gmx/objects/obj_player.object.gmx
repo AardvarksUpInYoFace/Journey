@@ -79,9 +79,9 @@ walk_counter = 0; // for audio
             <kind>1</kind>
             <string>/// Player Movement End
 
-if j &gt; 0 &amp;&amp;  j &lt; obj_control.map_size_n &amp;&amp; i &lt; obj_control.map_size_n &amp;&amp;  i &gt; 0 {
+if f_j &gt; 0 &amp;&amp;  f_j &lt; obj_control.map_size_n &amp;&amp; f_i &lt; obj_control.map_size_n &amp;&amp;  f_i &gt; 0 {
 
- if obj_control.grid[i,j] = 1{
+ if obj_control.grid[f_i,f_j] = 1{
 
 h_counter += h_spd;
 v_counter += v_spd;
@@ -208,8 +208,7 @@ v_dcc = v_acc//abs(v_spd)/6
             <kind>1</kind>
             <string>/// Player Mapping
 
-event_inherited()
-
+f_coord_get(3)
  
 
 

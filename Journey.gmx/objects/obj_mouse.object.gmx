@@ -8,58 +8,6 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// necessary variables for all moving objects
-
-
-speeed = 1;
-
-
-
-/* defunct????
-h_spd = 0; // horizontal speed
-v_spd = 0; // vertical speed
-
-h_counter = 0; // used to store excess h_spd for smoothing
-v_counter = 0;
-
-h_acc = 0.55; // 0.15
-v_acc = 0.55;
-
-
-h_spd_aim = 6;
-
-
-h_spd_aim_c = 6
-v_spd_aim_c = 6
-
-v_spd_aim = 6;
-
-
-walk_counter = 0; // for audio
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -77,24 +25,15 @@ walk_counter = 0; // for audio
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Object Co-ordinate Mapping
-//converted to script
-
-/*
-
-depth = -y/room_height
-
-// this calculates what grid point the object will be on in the next step
+            <string>///moise
+xDir = 0;
+yDir = 0;
 
 
-x_new = x + 2*xDir*3
-y_new = y + yDir*3
- 
- i = round(0.5*((x_new - room_width/2)/32  + (y_new - room_height/4)/16));
- j = round(0.5*((y_new - room_height/4)/16 - (x_new - room_width/2)/32));
- 
+f_coord_get(0);
 
-
+x = mouse_x
+y = mouse_y
 </string>
           </argument>
         </arguments>
@@ -117,14 +56,12 @@ y_new = y + yDir*3
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// coordinate gui
-draw_set_colour(c_white);
-//draw_self()
+            <string>/// show mouse x y and i j position
 
-draw_text(x,y,string(i) + ":" + string(j))
-//draw_text(x,y,string(x) + ":" + string(y))
+draw_set_colour(c_white)
+//draw_text(x,y,string(x) + ":" + string(y));
+draw_text(x,y,string(i) + ":" + string(j));
 
-draw_self()
 </string>
           </argument>
         </arguments>
