@@ -33,6 +33,8 @@
 
 globalvar key_right, key_left, key_up, key_down, key_A, key_B;
 globalvar key_right_p, key_left_p, key_up_p, key_down_p, key_A_p, key_B_p;
+globalvar dir_left, dir_right, dir_up, dir_down;
+globalvar key_X,key_X_p, key_Y, key_Y_p;
 
 // key is down
 
@@ -44,6 +46,9 @@ key_down = 0;
 key_A = 0;
 key_B = 0;
 
+key_X = 0;
+key_Y = 0;
+
 // key pressed
 
 key_right_p = 0;
@@ -53,6 +58,14 @@ key_down_p = 0;
 
 key_A_p = 0;
 key_B_p = 0;
+
+key_X_p = 0;
+key_Y_p = 0;
+
+dir_left = 0;
+dir_right = 0;
+dir_up = 0;
+dir_down = 0;
 
 
 /*========================================
@@ -186,17 +199,44 @@ key_right_p = (key_right and !key_right_previous);
 key_up_p = (key_up and !key_up_previous);
 key_down_p = (key_down and !key_down_previous);
 
+dir_left = 0;
+dir_right = 0;
+dir_up = 0;
+dir_down =0;
+
+if (mouse_x &lt; obj_player.x) or gamepad_axis_value(0,gp_axisrh) &lt;-0.3 dir_left = 1
+if (mouse_x &gt; obj_player.x) or gamepad_axis_value(0,gp_axisrh) &gt;0.3 dir_right = 1
+//if (mouse_x == obj_player.x) or gamepad_axis_value(0,gp_axisrh) == 0.3 dir_left = 0 dir_right = 0
+if (mouse_y &lt; obj_player.y) or gamepad_axis_value(0,gp_axisrv) &lt;-0.3 dir_up = 1
+if (mouse_y &gt; obj_player.y) or gamepad_axis_value(0,gp_axisrv) &gt;0.3 dir_down = 1
+//if (mouse_y == obj_player.y) or gamepad_axis_value(0,gp_axisrv) == 0.3 dir_up = 0 dir_down = 0;
+
+
 key_A = 0;
 key_A_p = 0;
 
-if(keyboard_check(vk_space) or keyboard_check(vk_control) or gamepad_button_check(0,gp_shoulderlb) or key_up) key_A = 1;
-if(keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_control) or gamepad_button_check_pressed(0,gp_shoulderlb) or key_up_p) key_A_p = 1;
+if(keyboard_check(vk_space) or keyboard_check(vk_control) or gamepad_button_check(0,gp_shoulderlb)) key_A = 1;
+if(keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_control) or gamepad_button_check_pressed(0,gp_shoulderlb)) key_A_p = 1;
 
 key_B = 0;
 key_B_p = 0;
 
 if(keyboard_check(ord("R")) or keyboard_check(vk_shift) or gamepad_button_check(0,gp_face3)) key_B = 1;
 if(keyboard_check_pressed(ord("R")) or keyboard_check_pressed(vk_shift) or gamepad_button_check_pressed(0,gp_face3)) key_B_p = 1;
+
+key_X = 0;
+key_X_p = 0;
+
+if(keyboard_check(ord("Q")) or keyboard_check(vk_alt) or gamepad_button_check(0,gp_shoulderr)) key_X = 1;
+if(keyboard_check_pressed(ord("Q")) or keyboard_check_pressed(vk_alt) or gamepad_button_check_pressed(0,gp_shoulderr)) key_X_p = 1;
+
+key_Y = 0;
+key_Y_p = 0;
+
+if(keyboard_check(ord("E")) or keyboard_check(ord("H")) or gamepad_button_check(0,gp_shoulderl)) key_B = 1;
+if(keyboard_check_pressed(ord("E")) or keyboard_check_pressed(ord("H")) or gamepad_button_check_pressed(0,gp_shoulderl)) key_B_p = 1;
+
+
 </string>
           </argument>
         </arguments>
@@ -329,9 +369,9 @@ map_type = ceil(random(1));
             
         f_spawn(obj_player, 1, 1);
         
-        // f_spawn(xp_orb_obj, 1, 1);
+         f_spawn(obj_orb1, 1, 10);
         
-        f_spawn(obj_enemy, 1, spread/2);
+        f_spawn(obj_enemy, 1, 3);
 
             
      //spawn player     
@@ -482,7 +522,11 @@ draw_text(view_wview[0]/2,60, string(minutes) + ":" + string(seconds));
 
 draw_text(view_wview[0]/2,100,string(obj_player.i) + ":" + string(obj_player.j));
 
-draw_text(view_wview[0]/2,300, map_size_n);
+//draw_text(view_wview[0]/2,300, map_size_n);
+draw_text(view_wview[0]/2,300, obj_player.hp);
+draw_text(view_wview[0]/2,307, obj_enemy.image_xscale);
+
+
 
 
 </string>

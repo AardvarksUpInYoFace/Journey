@@ -41,6 +41,8 @@ with(get_id) instance_destroy();
 
 }
 }
+
+
 </string>
           </argument>
         </arguments>

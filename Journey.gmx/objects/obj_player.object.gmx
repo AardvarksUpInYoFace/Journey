@@ -27,28 +27,30 @@
             <kind>1</kind>
             <string>/// Player Variables
 
-image_xscale = 3*image_xscale
+image_xscale = 3*image_xscale // because I am an idiot ;)
 image_yscale = 3*image_yscale
 
-// Movement Variables
+xDir = 0;
+yDir = 0;
 
-h_spd = 0; // horizontal speed
-v_spd = 0; // vertical speed
+speeed = 3;
+speeed_init = 3;
+hp = 3;
 
-h_counter = 0; // used to store excess h_spd for smoothing
-v_counter = 0;
+// state machine variables
+hit = false;
+rolling = false;
+attacking = false;
+walking = false;
 
-h_acc = 0.55; // 0.15
-v_acc = 0.55;
+// fighting variables?
+
+immune = false;
 
 
-h_spd_aim = 6;
 
 
-h_spd_aim_c = 6
-v_spd_aim_c = 6
-
-v_spd_aim = 6;
+/* defunct for now
 
 
 walk_counter = 0; // for audio
@@ -56,6 +58,58 @@ walk_counter = 0; // for audio
 
 
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>611</id>
+        <kind>6</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>immune</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>false</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>611</id>
+        <kind>6</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>rolling</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>false</string>
           </argument>
         </arguments>
       </action>
@@ -79,38 +133,18 @@ walk_counter = 0; // for audio
             <kind>1</kind>
             <string>/// Player Movement End
 
+if walking or rolling{ // the parametres just keep stacking up -_-
+
 if f_j &gt; 0 &amp;&amp;  f_j &lt; obj_control.map_size_n &amp;&amp; f_i &lt; obj_control.map_size_n &amp;&amp;  f_i &gt; 0 {
 
  if obj_control.grid[f_i,f_j] = 1{
 
-h_counter += h_spd;
-v_counter += v_spd;
-
-h = round(h_counter);
-v = round(v_counter);
-
-h_counter -= h;
-v_counter -= v;
-
-
-/*x+=2*h
-y+=v*/
-
-x += 2*xDir*3
-y += yDir*3
+x += 2*xDir*speeed
+y += yDir*speeed
 
 }
-else{ 
-    h_spd = -h_spd
-     v_spd = -v_spd
-    }
-
 }
-
-else{ 
-    h_spd = -h_spd
-     v_spd = -v_spd
-    }
+}
 </string>
           </argument>
         </arguments>
@@ -135,14 +169,77 @@ else{
             <kind>1</kind>
             <string>/// Player Movement
 
-depth = -y/room_height
+// Player Mapping
+f_coord_get(speeed)
+
+
+/*
+
+// starting work on the state machine
+
+priority from top to bottom
+
+    taking damage --&gt; hit
+    rolling --------&gt; rolling
+    attacking ------&gt; attacking
+    walking --------&gt; walking
+    idle -----------&gt; !walking
+
+*/
+
+
+ 
 
 xDir = key_right - key_left;
 yDir = key_down - key_up;
 
-h_dcc = h_acc//abs(h_spd)/6
-v_dcc = v_acc//abs(v_spd)/6
+if (xDir != 0 &amp;&amp; yDir != 0) speeed = speeed_init/1.4
+else speeed = speeed_init
 
+roll = key_A_p
+
+if hit {
+
+// run hit script with hit variables
+
+}
+
+if roll == 1 &amp;&amp; !rolling{
+     rolling = true 
+     immune = true
+     alarm[7] = 22
+     alarm[4] = 22    
+     speeed_init = 7
+     }
+     
+if !rolling speeed_init = 3;
+
+if attacking {
+
+// run attack script / need to define what is an attack ( do we oerlap over some of the roll frames
+// would certainly feel better to play
+
+}
+
+if !attacking &amp;&amp; abs(xDir) + abs(yDir) != 0 {
+
+    walking = true;
+    }
+
+else walking = false;
+
+
+
+
+
+
+
+
+
+
+
+
+/*
   if((xDir == 0 &amp;&amp; yDir == 0)){ 
     h_spd = f_approach(h_spd, 0, h_dcc); 
     v_spd = f_approach(v_spd, 0, v_dcc);
@@ -206,51 +303,27 @@ v_dcc = v_acc//abs(v_spd)/6
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Player Mapping
-
-f_coord_get(3)
- 
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>/// anim
 
+    if hit {
+            // hit animations go here
+            
+            }
 
-    if xDir = 0 &amp;&amp; yDir = 0{
-        
-        if image_index == 0 image_speed = 1;
-        else if image_index == 19 image_speed = -1;
+
+    else if rolling{
     
-        if sprite_index == kid_run_0_spr sprite_index = kid_idle_0_spr;
-        else if sprite_index == kid_run_1_spr sprite_index = kid_idle_1_spr;
-        else if sprite_index == kid_run_2_spr sprite_index = kid_idle_2_spr;
-        else if sprite_index == kid_run_3_spr sprite_index = kid_idle_3_spr;
-        else if sprite_index == kid_run_4_spr sprite_index = kid_idle_4_spr;
-        else if sprite_index == kid_run_5_spr sprite_index = kid_idle_5_spr;
-        else if sprite_index == kid_run_6_spr sprite_index = kid_idle_6_spr;
-        else if sprite_index == kid_run_7_spr sprite_index = kid_idle_7_spr;
+            //rolling animations go here
     
+                }
     
-        }
+    else if attacking {
+    
+               // lots of different attack animations go here much more logic, maybe sepereate more?     
+                    }
+    
+    else if walking{
+    
     if xDir = 1 &amp;&amp; yDir = 0{
         image_speed = 1
         sprite_index = kid_run_0_spr
@@ -283,11 +356,166 @@ f_coord_get(3)
         image_speed = 1
         sprite_index = kid_run_1_spr
         } 
+    }
+    
+    else {
+    
+            if image_index == 0 image_speed = 1;
+        else if image_index == 19 image_speed = -1;
+        
+        
+        xDir_f = dir_right  - dir_left
+        yDir_f = dir_down - dir_up
+    
+        if xDir_f == 1 &amp;&amp; yDir_f == 0  sprite_index = kid_idle_0_spr;
+        else if xDir_f == 1 &amp;&amp; yDir_f == -1 sprite_index = kid_idle_1_spr;
+        else if xDir_f == 0 &amp;&amp; yDir_f == -1 sprite_index = kid_idle_2_spr;
+        else if xDir_f == -1 &amp;&amp; yDir_f == -1 sprite_index = kid_idle_3_spr;
+        else if xDir_f == -1 &amp;&amp; yDir_f == 0 sprite_index = kid_idle_4_spr;
+        else if xDir_f == -1 &amp;&amp; yDir_f == 1 sprite_index = kid_idle_5_spr;
+        else if xDir_f == 0 &amp;&amp; yDir_f == 1 sprite_index = kid_idle_6_spr;
+        else if xDir_f == 1 &amp;&amp; yDir_f == 1 sprite_index = kid_idle_7_spr;
+    
+    
+        }
     
         
     
     
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// fighing???
+
+
+// when press x or left mouse click
+// execute fighting script
+// doing attack animation in direction? (currently facing for gamepad, mouse location for keyboard+mouse
+//if enemy hit, do the damage
+
+
+// we need life for all alive things // we has life! 
+// need damage...
+    
+/*
+if key_X_p or key_Y_p attacking = true;
+
+if attacking {
+
+//which direction are we facing?
+    
+
+// what kind of attack are we doing
+    if key_X_p {
+    
+                switch (sprite_index){
+                
+                case kid_run_0_spr:
+                // run logic for animation 0 attack X
+                /*
+                    e.g.
+                        // set collision mask and animation
+                        mask_index = attack_X_0_mask
+                        
+                        switch (attack_counter){
+                        
+                        case 1: sprite_index = attack_X_0_1
+                                break;
+                        case 2: sprite_index = attack_X_0_2
+                                break;
+                        case 3: sprite_index = attack_X_0_3
+                                break;
+                                
+                        // set attack variables
+                        image_speed = 1;
+                        attack_counter += 1
+                        alarm[3] = 20 ; reset attack counter and reset attacking to false too        
+                        
+                                
+                       add some pixels to x and y depending on facing the right direction
+                        x += 2*
+                        y += yDir
+                        
+                       
+                        
+                *//*
+                break;
+                case kid_run_1_spr:
+                
+                break;
+                case kid_run_2_spr:
+                break;
+                case kid_run_3_spr:
+                break;
+                case kid_run_4_spr:
+                break;
+                case kid_run_5_spr:
+                break;
+                case kid_run_6_spr:
+                break;
+                case kid_run_7_spr:
+                break;
+    
+                }
+                
+                
+    else if key_Y_p 
+    //else if....
+
+immune = true; // can't be hit whilst attacking
+
+
+
+
+
+
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy_attack">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// damage test heirachy
+
+
+f_player_damage(1);
 </string>
           </argument>
         </arguments>

@@ -50,6 +50,11 @@
         <sprite>sprites\kid_idle_7_spr</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\spr_pylon</sprite>
+    <sprite>sprites\spr_goatThing</sprite>
+    <sprite>sprites\spr_goatThing_walking</sprite>
+    <sprite>sprites\spr_dirk</sprite>
+    <sprite>sprites\spr_aoe_horse</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg_1</background>
@@ -72,8 +77,8 @@
     <script>scripts\draw_trail.gml</script>
     <script>scripts\f_coord_get.gml</script>
     <script>scripts\f_example_ai_attack.gml</script>
+    <script>scripts\f_player_damage.gml</script>
   </scripts>
-  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_collidble</object>
